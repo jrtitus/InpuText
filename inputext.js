@@ -17,10 +17,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 				'height':'30px',
 				'type':'text',			// Marks the text field as being a textfield or a password field (default: text)
 				'pattern':'.?',			// Makes the text field adhere to a pattern. Only works if dataType = string (default: accepts all characters and blank field)
+				'patternErrMsg': 'Pattern mis-match',
 				'placeholder':'',		// Assigns default text (the text you see before you type) (default: none)
 				'required':false,		// Designates the text field as a required field (default:false)
 				'maxLength':-1,			// Defines a maxlength attribute for the text field (default: no max length)
-				'readonly':false,		// Marks the text field as readonly or r/w (default: r/w)
+				'readOnly':false,		// Marks the text field as readonly or r/w (default: r/w)
 				'disabled':false,		// Marks the text field as disabled or enabled (default: enabled)
 				'dataType':'string',	// String, integer, real, hex (default: string)
 				'target':'',			// Element the error message will be loaded into on keyup event (default: no target)
@@ -42,7 +43,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 						_errorMsg = 'Required field is blank';
 					}else if(!$(this).val().match(settings.pattern) && $(this).val() !== '' && settings.dataType === 'string'){
 						setInError(this);
-						_errorMsg = 'Pattern mis-match';
+						_errorMsg = settings.patternErrMsg;
 					}else if($(this).val() !== '' && settings.dataType === 'integer' && !$(this).val().match(/^[0-9]+$/)){
 						setInError(this);
 						_errorMsg = 'Field value is not an Integer';
@@ -89,7 +90,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 					$(this).prop('maxlength', settings.maxLength)
 				}
 
-				if(settings.readonly){
+				if(settings.readOnly){
 					$(this).attr('readonly', 'readonly');
 				}
 
